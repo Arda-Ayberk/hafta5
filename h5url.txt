@@ -1,0 +1,29 @@
+from datetime import datetime, timedelta
+import random
+
+def tariholustur(t1, t2):
+    tarih1 = datetime.strptime(t1, "%d.%m.%Y")
+    tarih2 = datetime.strptime(t2, "%d.%m.%Y")
+    tarih_listesi = []
+    
+    while tarih1 <= tarih2:
+        tarih_listesi.append(tarih1.strftime("%d-%m-%Y"))
+        tarih1 += timedelta(days=1)
+    
+    return tarih_listesi
+
+def url_olustur(gazete, kategori, tarih):
+    return f"www.{gazete}.com.tr/{kategori}/{tarih}"
+
+t11 = input("Başlangıç tarihini girin (gün.ay.yıl): ")
+t12 = input("Bitiş tarihini girin (gün.ay.yıl): ")
+
+tarih_listesi = tariholustur(t11, t12)
+
+gazeteler = ["sabah", "hurriyet", "milliyet"]
+kategoriler = ["saglik", "dunya", "teknoloji"]
+
+for tarih in tarih_listesi:
+    gazete = random.choice(gazeteler)
+    kategori = random.choice(kategoriler)
+    print(url_olustur(gazete, kategori, tarih))
